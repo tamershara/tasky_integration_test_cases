@@ -14,11 +14,13 @@ public interface FrameworkConfig extends Config {
     @DefaultValue("CHROME")
     BrowserType browser();
 
-    @DefaultValue("https://tasky-be.qacart.com/api")
-    @Key("api.url")
-    String apiURL();
-
     @DefaultValue("https://tasky.qacart.com")
     @Key("pageBase.url")
     String pageBaseURL();
+
+    String regularUserCookies();
+
+    String subscribedUserCookies();
+
+
 }
