@@ -17,7 +17,7 @@
         <!-- Dependencies Versions-->
         <owner-version>1.0.12</owner-version>
         <selenium-version>4.31.0</selenium-version>
-
+        <wiremock-version>3.12.1</wiremock-version>
 
     </properties>
 
@@ -31,6 +31,12 @@
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>${selenium-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wiremock</groupId>
+            <artifactId>wiremock</artifactId>
+            <version>${wiremock-version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
