@@ -18,6 +18,7 @@ public interface FrameworkConfig extends Config {
     @Key("pageBase.url")
     String pageBaseURL();
 
+    @DefaultValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY4NmVkNTc1LTMzNWQtNGY4ZS05MjRiLTFmMzNjN2VjNDEzNiIsImVtYWlsIjoidGVzdF85MDkwX2F1dG9tYXRpb25AZXhhbXBsZS5jb20iLCJ1c2VyVHlwZSI6InJlZ3VsYXIiLCJpYXQiOjE3NDU1MTI2MTQsImV4cCI6MTc0NTU5OTAxNH0.OkReChoKbGv0NgkJvVTeOz2ThQvb8xCEcKOsDpRXRPc")
     String regularUserCookies();
 
     String subscribedUserCookies();

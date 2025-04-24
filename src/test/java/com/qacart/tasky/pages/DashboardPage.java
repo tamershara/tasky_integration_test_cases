@@ -13,5 +13,7 @@ public class DashboardPage implements BasePage {
     public void load() {
         getDriver().get(getConfig().pageBaseURL() + "/dashboard");
     }
-
+    public void goToSubscriptionTab() {
+        getDriver().findElement(subscriptionTabLocator).click();
+    }
 }
