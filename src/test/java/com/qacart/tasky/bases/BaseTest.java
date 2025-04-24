@@ -4,32 +4,43 @@ import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import com.qacart.tasky.driver.Driver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
+import java.io.IOException;
 import java.time.Duration;
 
-import static com.qacart.tasky.driver.managers.DriverManager.getDriver;
+import static com.qacart.tasky.driver.manager.DriverManager.getDriver;
+import static com.qacart.tasky.utils.ScreenshotUtils.takeScreenShot;
 
 public class BaseTest {
-    protected WireMockServer wireMockServer;
+    protected  WireMockServer wireMockServer;
 
-    @BeforeTest
+    @BeforeMethod
     protected void setUpDriver() {
-        Driver.initialize();
+        Driver.initDriver();
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
     }
 
-    @BeforeTest
+    @BeforeMethod
     protected void setUpMockServer() {
-        wireMockServer = new WireMockServer(new WireMockConfiguration().port(8091).enableBrowserProxying(true));
+        wireMockServer = new WireMockServer(
+                WireMockConfiguration.options()
+                        .port(8091)
+                        .enableBrowserProxying(true)
+        );
         wireMockServer.start();
         WireMock.configureFor("localhost", 8091);
     }
 
-    @AfterTest
-    protected void tearDown() {
+    @AfterMethod
+    protected void tearDown(ITestResult result) throws IOException {
+        if (wireMockServer != null && wireMockServer.isRunning()) {
+            wireMockServer.stop();
+        }
+        takeScreenShot(result);
         getDriver().quit();
-        wireMockServer.stop();
+
     }
 }

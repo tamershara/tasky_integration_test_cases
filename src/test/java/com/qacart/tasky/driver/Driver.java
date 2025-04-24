@@ -1,14 +1,14 @@
 package com.qacart.tasky.driver;
 
-import com.qacart.tasky.driver.managers.DriverManager;
 
-import static com.qacart.tasky.driver.factory.DriverFactory.initDriver;
+import com.qacart.tasky.driver.factory.Factory;
+import com.qacart.tasky.driver.manager.DriverManager;
+import org.openqa.selenium.WebDriver;
 
 public final class Driver {
-    private Driver() {
-    }
-
-    public static void initialize() {
-        DriverManager.setDriver(initDriver());
+    private Driver() {}
+    public static void initDriver(){
+            WebDriver driver = Factory.initDriver();
+            DriverManager.setDriver(driver);
     }
 }
