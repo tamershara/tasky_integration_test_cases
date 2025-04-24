@@ -1,10 +1,14 @@
 package com.qacart.tasky.pages;
 
 import com.qacart.tasky.bases.BasePage;
+import com.qacart.tasky.model.CreditCard;
 import org.openqa.selenium.By;
 
 import static com.qacart.tasky.configs.ConfigFactory.getConfig;
 import static com.qacart.tasky.driver.managers.DriverManager.getDriver;
+import static com.qacart.tasky.mocker.CurrentSubscriptionMock.mockActivatedCurrentSubscription;
+import static com.qacart.tasky.mocker.ProfileMock.mockSubscribedProfile_1;
+import static com.qacart.tasky.mocker.SubscriptionAPIsMock.mockSuccessfulSubscriptionResponse;
 
 public class SubscriptionPage implements BasePage {
    private final By upgradeButtonLocator = By.xpath("//button[normalize-space()='Upgrade']");
@@ -21,4 +25,25 @@ public class SubscriptionPage implements BasePage {
         getDriver().get(getConfig().pageBaseURL() + "/dashboard/subscription");
     }
 
+    public void mockSubscriptionFlowAPIResponse() {
+        mockSubscribedProfile_1();
+        mockActivatedCurrentSubscription();
+        mockSuccessfulSubscriptionResponse();
+    }
+
+    public void subscribe(CreditCard cardInfo){
+        mockSubscriptionFlowAPIResponse();
+        getDriver().findElement(upgradeButtonLocator).click();
+        getDriver().findElement(cardNumberLocator).sendKeys(cardInfo.getCardNumber());
+        getDriver().findElement(expiryMonthLocator).sendKeys(cardInfo.getExpiryMonth());
+        getDriver().findElement(expiryYearLocator).sendKeys(cardInfo.getExpiryYear());
+        getDriver().findElement(cvvLocator).sendKeys(cardInfo.getCvv());
+        getDriver().findElement(subscribeButtonLocator).click();
+    }
+
+    public boolean isUpgradeButtonEnabled() {
+        return getDriver().findElement(upgradeButtonLocator).isEnabled();
+    }
+
 }
+
