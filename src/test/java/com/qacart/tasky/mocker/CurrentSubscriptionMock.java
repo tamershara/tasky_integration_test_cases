@@ -34,7 +34,7 @@ public final class CurrentSubscriptionMock {
     }
 
     public static void mockSubscribedCurrentSubscription() {
-        String responseMockFile = "currentSubscriptionCloseToBeExpired.json";
+        String responseMockFile = "currentSubscriptionData_RenewalTest.json";
         stubFor(
                 get(
                         urlEqualTo(testURL))
