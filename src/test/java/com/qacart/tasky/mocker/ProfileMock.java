@@ -44,5 +44,18 @@ public final class ProfileMock {
         );
     }
 
+    public static void mockCancelledProfile(){
+        String responseMockFile = "cancelledProfile.json";
+        stubFor(
+                get(
+                        urlEqualTo(testUrl))
+                        .willReturn(
+                                aResponse()
+                                        .withStatus(200)
+                                        .withBodyFile(responseMockFile)
+                        )
+        );
+    }
+
 
 }

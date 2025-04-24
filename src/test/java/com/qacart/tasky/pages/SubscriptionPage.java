@@ -7,7 +7,9 @@ import org.openqa.selenium.By;
 import static com.qacart.tasky.configs.ConfigFactory.getConfig;
 import static com.qacart.tasky.driver.managers.DriverManager.getDriver;
 import static com.qacart.tasky.mocker.CurrentSubscriptionMock.mockActivatedCurrentSubscription;
+import static com.qacart.tasky.mocker.ProfileMock.mockCancelledProfile;
 import static com.qacart.tasky.mocker.ProfileMock.mockSubscribedProfile_1;
+import static com.qacart.tasky.mocker.SubscriptionAPIsMock.mockSuccessfulCancelSubscriptionResponse;
 import static com.qacart.tasky.mocker.SubscriptionAPIsMock.mockSuccessfulSubscriptionResponse;
 
 public class SubscriptionPage implements BasePage {
@@ -25,7 +27,7 @@ public class SubscriptionPage implements BasePage {
         getDriver().get(getConfig().pageBaseURL() + "/dashboard/subscription");
     }
 
-    public void mockSubscriptionFlowAPIResponse() {
+    private void mockSubscriptionFlowAPIResponse() {
         mockSubscribedProfile_1();
         mockActivatedCurrentSubscription();
         mockSuccessfulSubscriptionResponse();
@@ -43,6 +45,17 @@ public class SubscriptionPage implements BasePage {
 
     public boolean isUpgradeButtonEnabled() {
         return getDriver().findElement(upgradeButtonLocator).isEnabled();
+    }
+
+    private void mockCancelSubscriptionAPIResponse() {
+        mockCancelledProfile();
+        mockSuccessfulCancelSubscriptionResponse();
+    }
+
+    public void cancelSubscription() {
+        mockCancelSubscriptionAPIResponse();
+        getDriver().findElement(cancelButtonLocator).click();
+        getDriver().findElement(confirmCancellationButtonLocator).click();
     }
 
 }
