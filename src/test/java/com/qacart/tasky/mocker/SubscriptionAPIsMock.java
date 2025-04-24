@@ -33,4 +33,18 @@ public final class SubscriptionAPIsMock {
         );
     }
 
+    public static void mockSuccessfulCancelSubscriptionResponse() {
+        String testURL = "/api/subscriptions/cancel";
+        String responseMockFile = "cancelSubscription.json";
+        stubFor(
+                post(
+                        urlEqualTo(testURL))
+                        .willReturn(
+                                aResponse()
+                                        .withStatus(201)
+                                        .withBodyFile(responseMockFile)
+                        )
+        );
+    }
+
 }
