@@ -19,6 +19,8 @@ public class RenewalSubscriptionTest extends BaseTest {
 
     @Test
     void renewalButtonShouldBeDisplayedIfTheSubscriptionEndDateIsCloseToEndByTwoDays(){
+        dashboardPage.makeTheUserCloseToBeExpired();
+        dashboardPage.load();
         Assert.assertTrue(dashboardPage.isRenewButtonPresent());
     }
 }
