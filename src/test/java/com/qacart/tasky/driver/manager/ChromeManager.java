@@ -1,4 +1,4 @@
-package com.qacart.tasky.driver.managers;
+package com.qacart.tasky.driver.manager;
 
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -16,6 +16,7 @@ public final class ChromeManager {
         ChromeOptions options = new ChromeOptions();
         Proxy proxy = new Proxy();
         proxy.setSslProxy("localhost:8091");
+        options.addArguments("--start-maximized");
         options.addArguments("--ignore-certificate-errors");
         options.addArguments("--disable-web-security");
         options.setProxy(proxy);
