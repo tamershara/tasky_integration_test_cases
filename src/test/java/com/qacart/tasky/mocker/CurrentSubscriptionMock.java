@@ -19,4 +19,32 @@ public final class CurrentSubscriptionMock {
                         )
         );
     }
+
+    public static void mockSubscribedCurrentSubscriptionToBeCloseToExpired() {
+        String responseMockFile = "currentSubscriptionCloseToBeExpired.json";
+        stubFor(
+                get(
+                        urlEqualTo(testURL))
+                        .willReturn(
+                                aResponse()
+                                        .withStatus(200)
+                                        .withBodyFile(responseMockFile)
+                        )
+        );
+    }
+
+    public static void mockSubscribedCurrentSubscription() {
+        String responseMockFile = "currentSubscriptionData_RenewalTest.json";
+        stubFor(
+                get(
+                        urlEqualTo(testURL))
+                        .willReturn(
+                                aResponse()
+                                        .withStatus(200)
+                                        .withBodyFile(responseMockFile)
+                        )
+        );
+    }
+
+
 }
